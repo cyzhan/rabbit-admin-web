@@ -5,13 +5,15 @@ import getMenu from '../custom/index.js'
 export default createStore({
   state: {
     currentUser: null,
-    menu: getMenu()
+    menu: null
   },
   getters: {
   },
   mutations: {
     updateCurrentUser: (state, payload) => {
-      state.currentUser = payload
+      state.menu = getMenu(payload.permission)
+      delete payload.permission
+      state.currentUser = payload   
     }
   },
   actions: {

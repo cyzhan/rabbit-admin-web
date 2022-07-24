@@ -53,11 +53,8 @@ const menu = [
     }
 ]
 
-// permission must be sort 
-const permission = [100, 110, 120, 1000, 1010, 1020]
 
-
-function getMenu(){
+function getMenu(permission){
     const map = new Map();
     menu.forEach(category => {
         map.set(category.id, {id: category.id, name:category.name, children: []})
