@@ -1,8 +1,11 @@
 import { createStore } from 'vuex'
+import getMenu from '../custom/index.js'
+
 
 export default createStore({
   state: {
-    currentUser: null
+    currentUser: null,
+    menu: getMenu()
   },
   getters: {
   },
