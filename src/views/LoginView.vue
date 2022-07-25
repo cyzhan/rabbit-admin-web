@@ -16,9 +16,6 @@
 </template>
 
 <script>
-// import router from '@/router'
-// import { mapActions } from 'vuex'
-
 export default {
   name: 'LoginComponent',
   data(){
@@ -51,16 +48,14 @@ export default {
           'Content-Type': 'application/json'
         })
       })
-      const a = await response.json()
-      console.log(`code = ${a.code}, msg = ${a.msg}`)
-      if (a.code === 0) {
-        // await mapActions.dispatch('updateCurrentUser', a.data)
-        await this.$store.dispatch('updateCurrentUser', a.data)
-        this.$router.push(
-          {
-            name: 'admin'
-          }
-        )
+      const resp = await response.json()
+      // console.log(`code = ${a.code}, msg = ${a.msg}`)
+      if (resp.code === 0) {
+        // temporary hardcode response permission
+        // permission must be sort 
+        resp.data.permission = [100, 110, 120, 1000, 1010, 1020]
+        await this.$store.dispatch('updateCurrentUser', resp.data)
+        this.$router.push({name: 'admin'})
       }
 
     }

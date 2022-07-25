@@ -14,10 +14,10 @@
     <div id="body-container">
       <div class="side-bar">
         <ul id="menu">
-          <li :key="item.id" v-for="item in fullMenu">
+          <li :key="item.id" v-for="item in menu">
             <div class="side-bar-category">{{item.name}}</div>
             <div class="sub-menu-wrapper">
-              <div :key="subMenu.id" v-for="subMenu in item.children" class="side-bar-item">{{subMenu.name}}</div>
+              <div :key="subMenu.id" v-for="subMenu in item.children" v-on:click="subMenuClick(subMenu.id)" class="side-bar-item">{{subMenu.name}}</div>
             </div>
           </li>  
         </ul>
@@ -35,36 +35,7 @@ export default {
   name: 'LoginComponent',
   data(){
     return {
-      fullMenu: [
-        {
-          id: 100,
-          name: "會員訊息",
-          children: [
-            {
-              id: 110,
-              name: "會員列表"
-            },
-            {
-              id: 120,
-              name: "在線會員"
-            }
-          ]
-        },
-        {
-          id: 1000,
-          name: "系統",
-          children: [
-            {
-              id: 1010,
-              name: "系統設定"
-            },
-            {
-              id: 1020,
-              name: "系統日誌"
-            }
-          ]
-        }
-      ] 
+      menu: this.$store.state.menu
     }
   },
   props: {
@@ -73,6 +44,9 @@ export default {
   methods: {
     aaa(){
       console.log(`show user: id = ${this.$store.state.currentUser.id}, name = ${this.$store.state.currentUser.name}`)
+    },
+    subMenuClick(id){
+      console.log(`${id} is clicked`)
     }
   },
   mounted:() => {
