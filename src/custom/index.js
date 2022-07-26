@@ -5,11 +5,13 @@ const menu = [
         children: [
             {
                 id: 110,
-                name: "會員列表"
+                name: '會員列表',
+                componentName: 'demoOne'
             },
             {
                 id: 120,
-                name: "在線會員"
+                name: "在線會員",
+                componentName: 'demoTwo'
             }
         ]
     },
@@ -19,7 +21,8 @@ const menu = [
         children: [
             {
                 id: 210,
-                name: "訂單列表"
+                name: "訂單列表",
+                componentName: 'demoTwo'
             }
         ]
     },
@@ -43,11 +46,13 @@ const menu = [
         children: [
             {
                 id: 1010,
-                name: "系統設定"
+                name: "系統設定",
+                componentName: 'demoTwo'
             },
             {
                 id: 1020,
-                name: "系統日誌"
+                name: "系統日誌",
+                componentName: 'demoTwo'
             }
         ]
     }

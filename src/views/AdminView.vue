@@ -17,40 +17,50 @@
           <li :key="item.id" v-for="item in menu">
             <div class="side-bar-category">{{item.name}}</div>
             <div class="sub-menu-wrapper">
-              <div :key="subMenu.id" v-for="subMenu in item.children" v-on:click="subMenuClick(subMenu.id)" class="side-bar-item">{{subMenu.name}}</div>
+              <div :key="subMenu.id" v-for="subMenu in item.children" v-on:click="subMenuClick(subMenu.id)" @click.prevent="changeView('DemoOne')" class="side-bar-item">{{subMenu.name}}</div>
             </div>
           </li>  
         </ul>
       </div>
-      <div class="main-wrapper">
+      <div class="main-wrapper" v-bind:is="view">
+      <!-- <div class="main-wrapper">
         <div id="searchWrapper"></div>
         <div id="tableWrapper"></div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
+import menuHandler from '@/custom/menu-handler'
+
 export default {
   name: 'LoginComponent',
   data(){
     return {
-      menu: this.$store.state.menu
+      view: 'DemoTwo',
+      menu: this.$store.state.menu,
     }
   },
   props: {
     
   },
   methods: {
+    changeView(viewName){
+      this.view = viewName
+    },
     aaa(){
       console.log(`show user: id = ${this.$store.state.currentUser.id}, name = ${this.$store.state.currentUser.name}`)
     },
     subMenuClick(id){
-      console.log(`${id} is clicked`)
+      const fn = menuHandler.get(id)
+      if (fn != undefined){
+        fn();
+      }
     }
   },
   mounted:() => {
-    console.log('do initSubMenu')
+    // console.log('do initSubMenu')
     let subMenuWrapperAry = document.querySelectorAll('.sub-menu-wrapper');
 
     subMenuWrapperAry.forEach(item => {
@@ -62,9 +72,9 @@ export default {
         })
     })
 
-    const tableWrapper = document.getElementById('tableWrapper')
-    const initHeight = tableWrapper.clientHeight
-    tableWrapper.style.height = initHeight - 20 + 'px';
+    // const tableWrapper = document.getElementById('tableWrapper')
+    // const initHeight = tableWrapper.clientHeight
+    // tableWrapper.style.height = initHeight - 20 + 'px';
   }
 }
 </script>
@@ -173,7 +183,7 @@ export default {
     box-sizing: border-box;
 }
 
-#searchWrapper>div:nth-child(1) {
+/* #searchWrapper>div:nth-child(1) {
     display: flex;
     flex-flow: row nowrap;
     height: 50px;
@@ -229,5 +239,5 @@ tr:nth-child(even) {
 }
 .search-submit:hover{
     background-color: #adb053;
-}
+} */
 </style>
