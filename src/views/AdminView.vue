@@ -22,17 +22,19 @@
           </li>  
         </ul>
       </div>
-      <div class="main-wrapper" v-bind:is="view">
-      <!-- <div class="main-wrapper">
-        <div id="searchWrapper"></div>
-        <div id="tableWrapper"></div>
-      </div> -->
+      <div class="main-wrapper">
+        <component :is="view"></component>
+        <!-- <div id="searchWrapper"></div>
+        <div id="tableWrapper"></div> -->
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import menuHandler from '@/custom/menu-handler'
+import DemoOne from '../components/DemoOne.vue'
+import DemoTwo from '../components/DemoTwo.vue'
 
 export default {
   name: 'LoginComponent',
@@ -59,7 +61,7 @@ export default {
       }
     }
   },
-  mounted:() => {
+  mounted: async() => {
     // console.log('do initSubMenu')
     let subMenuWrapperAry = document.querySelectorAll('.sub-menu-wrapper');
 
@@ -71,10 +73,14 @@ export default {
             item.style.height = currentHeight > 0 ? '0px' : initHeight + 'px';
         })
     })
-
+    const height = document.getElementById('body-container').clientHeight
+    await this.$store.dispatch('updateSidebarHeight', height)
     // const tableWrapper = document.getElementById('tableWrapper')
     // const initHeight = tableWrapper.clientHeight
     // tableWrapper.style.height = initHeight - 20 + 'px';
+  },
+  components: {
+    DemoOne, DemoTwo
   }
 }
 </script>
