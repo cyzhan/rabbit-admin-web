@@ -11,12 +11,9 @@ export default {
   },
   props: {},
   methods: {},
-  //   mounted:() => {
-  //     const tableWrapper = document.getElementById('tableWrapper')
-  //     const initHeight = tableWrapper.clientHeight
-  //     console.log(`tableWrapper initHeight = ${initHeight}`)
-  //     tableWrapper.style.height = initHeight - 20 + 'px';
-  //   }
+  mounted:() => {
+
+  }
 };
 </script>
 
@@ -39,7 +36,8 @@ export default {
 
 #tableWrapper {
   padding: 20px;
-  height: 100%;
+  height: 900px;
+  background-color: rgb(242, 246, 224);
   box-sizing: border-box;
 }
 .search-label {
